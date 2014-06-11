@@ -51,4 +51,18 @@ describe Player do
       expect(@player).not_to be_strong
     end
   end
+
+  context 'in a collection of players' do
+    before do
+      @player_one   = Player.new("Fozzie", 100)
+      @player_two   = Player.new("Kermit", 200)
+      @player_three = Player.new("Gonzo", 300)
+
+      @players = [ @player_one, @player_two, @player_three ]
+    end
+
+    it 'is sorted by decending score' do
+      expect(@players.sort).to eq [ @player_three, @player_two, @player_one ]
+    end
+  end
 end

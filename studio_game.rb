@@ -5,7 +5,7 @@ require_relative 'berserk_player'
 game = Game.new("Treasure Hunter")
 game.load_players(ARGV.shift || "players.csv")
 
-klutz = ClumsyPlayer.new('klutz', 105)
+klutz = ClumsyPlayer.new('klutz', 105, 10)
 game.add_player(klutz)
 
 berserker = BerserkPlayer.new('berserk', 50)

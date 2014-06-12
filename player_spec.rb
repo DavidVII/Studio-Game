@@ -110,4 +110,11 @@ describe Player do
       Treasure.new(:bottle, 25)
     ]
   end
+
+  it 'can be created from a CSV string' do
+    player = Player.from_csv('fozzie,100')
+
+    expect(player.name).to eq 'Fozzie'
+    expect(player.health).to eq 100
+  end
 end

@@ -17,11 +17,17 @@ describe Player do
   end
 
   it 'has a string representation' do
-    expect(@player.to_s).to eq("I'm Fozzie with a health of 150 and a score of 156.")
+    @player.found_treasure(Treasure.new(:hammer, 50))
+    @player.found_treasure(Treasure.new(:hammer, 50))
+
+    expect(@player.to_s).to eq("I'm Fozzie with health = 150, points = 100, and score = 250.")
   end
 
-  it 'computes a score as the sum of its health and length of name' do
-    expect(@player.score).to eq(150 + @player.name.length)
+  it "computes a score as the sum of its health and points" do
+    @player.found_treasure(Treasure.new(:hammer, 50))
+    @player.found_treasure(Treasure.new(:hammer, 50))
+
+    expect(@player.score).to eq(@initial_health + 100)
   end
 
   it 'increases health by 15 when w00ted' do

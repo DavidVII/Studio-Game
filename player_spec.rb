@@ -100,7 +100,7 @@ describe Player do
 
     yielded = []
 
-    @player.each_found_treasures do |treasure|
+    @player.each_found_treasure do |treasure|
       yielded << treasure
     end
 

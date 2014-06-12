@@ -1,14 +1,14 @@
 require_relative 'game'
 
-player1 = Player.new("moe")
-player2 = Player.new("larry", 60)
-player3 = Player.new("curly", 125)
+player1 = Player.new("fozzie")
+player2 = Player.new("kermit", 60)
+player3 = Player.new("gonzo", 125)
 
-knuckleheads = Game.new("Knuckleheads")
-knuckleheads.add_player(player1)
-knuckleheads.add_player(player2)
-knuckleheads.add_player(player3)
-knuckleheads.play(4)
-knuckleheads.print_stats
+muppets = Game.new("Muppets")
+muppets.add_player(player1)
+muppets.add_player(player2)
+muppets.add_player(player3)
+muppets.play(4)
+muppets.print_stats
 
 

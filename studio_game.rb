@@ -23,12 +23,3 @@ loop do
     puts "\nPlease enter a number or type 'quit'"
   end
 end
-
-# play up to a 2000 point total
-#muppets.play(10) do
-  #muppets.total_points >= 2000
-#end
-
-#muppets.print_stats
-
-

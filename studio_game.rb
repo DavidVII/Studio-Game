@@ -1,13 +1,7 @@
 require_relative 'game'
 
-player1 = Player.new("fozzie")
-player2 = Player.new("kermit", 60)
-player3 = Player.new("gonzo", 125)
-
-muppets = Game.new("Muppets")
-muppets.add_player(player1)
-muppets.add_player(player2)
-muppets.add_player(player3)
+game = Game.new("Treasure Hunter")
+game.load_players(ARGV.shift || "players.csv")
 
 loop do
   puts "\nHow many rounds do you want to play? ('quit' to exit)"
@@ -15,9 +9,9 @@ loop do
 
   case answer
   when /^\d+$/
-    muppets.play(answer.to_i)
+    game.play(answer.to_i)
   when 'quit', 'exit'
-    muppets.print_stats
+    game.print_stats
     break
   else
     puts "\nPlease enter a number or type 'quit'"

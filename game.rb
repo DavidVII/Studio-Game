@@ -11,6 +11,14 @@ class Game
     @players = []
   end
 
+  def load_players(from_file)
+    File.readlines(from_file).each do |line|
+      name, health = line.split(',')
+      player = Player.new(name, Integer(health))
+      add_player(player)
+    end
+  end
+
   def add_player(player)
     @players << player
   end

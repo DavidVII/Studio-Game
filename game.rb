@@ -1,6 +1,7 @@
 require_relative 'player'
 require_relative 'die'
 require_relative 'game_turn'
+require_relative 'treasure_trove'
 
 class Game
   attr_reader :title
@@ -44,6 +45,14 @@ class Game
     puts "There are #{@players.size} players in the game:"
     @players.each do |player|
       puts player
+    end
+
+    treasures = TreasureTrove::TREASURES
+
+    puts "\nThere are #{treasures.size} treasures to be found:"
+
+    treasures.each do |t|
+      puts "A #{t.name} is worth #{t.points} points"
     end
 
     1.upto(rounds) do |round|

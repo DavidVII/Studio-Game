@@ -23,10 +23,14 @@ class Game
     File.open(to_file, "w") do |file|
       file.puts "#{@title} High Scores:"
       @players.sort.each do |player|
-        formated_name = player.name.ljust(20, '.')
-        file.puts "#{formated_name}#{player.score}"
+        file.puts high_score_entry(player)
       end
     end
+  end
+
+  def high_score_entry(player)
+    formated_name = player.name.ljust(20, '.')
+    "#{formated_name}#{player.score}"
   end
 
   def add_player(player)
@@ -82,8 +86,7 @@ class Game
 
     puts "\n#{@title}'s High Scores:"
     @players.sort.each do |player|
-      formated_name = player.name.ljust(20, '.')
-      puts "#{formated_name}#{player.score}"
+      puts high_score_entry(player)
     end
 
     @players.each do |player|

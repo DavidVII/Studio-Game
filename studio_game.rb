@@ -17,3 +17,5 @@ loop do
     puts "\nPlease enter a number or type 'quit'"
   end
 end
+
+game.save_high_scores

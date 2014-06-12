@@ -70,6 +70,15 @@ class Game
     end
 
     puts "\n#{total_points} total points from treasures found"
+
+    @players.sort.each do |player|
+      puts "\n#{player.name} point summary:"
+
+      player.each_found_treasure do |treasure|
+        puts "#{treasure.points} total #{treasure.name} points"
+      end
+      puts "#{player.points} grand total points"
+    end
   end
 
   def total_points

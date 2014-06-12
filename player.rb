@@ -7,7 +7,7 @@ class Player
   def initialize(name, health=100)
     @name = name.capitalize
     @health = health
-    @found_treasure = Hash.new(0)
+    @found_treasures = Hash.new(0)
   end
 
   def blam
@@ -28,15 +28,21 @@ class Player
     @health > 100
   end
 
-  def found_treasure(treasure)
-    @found_treasure[treasure.name] += treasure.points
+  def found_treasures(treasure)
+    @found_treasures[treasure.name] += treasure.points
 
     puts "#{@name} found a #{treasure.name} worth #{treasure.points} points"
-    puts "#{@name}'s treasure: #{@found_treasure}"
+    puts "#{@name}'s treasure: #{@found_treasures}"
+  end
+
+  def each_found_treasure
+    @found_treasures.each do |name, points|
+      yield Treasure.new(name, points)
+    end
   end
 
   def points
-    @found_treasure.values.reduce(0, :+)
+    @found_treasures.values.reduce(0, :+)
   end
 
   def to_s

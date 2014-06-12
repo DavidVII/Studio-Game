@@ -17,6 +17,6 @@ module GameTurn
 
     # Find a random treasure
     treasure = TreasureTrove.random
-    player.found_treasure(treasure)
+    player.found_treasures(treasure)
   end
 end

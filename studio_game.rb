@@ -8,7 +8,12 @@ muppets = Game.new("Muppets")
 muppets.add_player(player1)
 muppets.add_player(player2)
 muppets.add_player(player3)
-muppets.play(4)
+
+# play up to a 2000 point total
+muppets.play(10) do
+  muppets.total_points >= 2000
+end
+
 muppets.print_stats
 
 

@@ -4,111 +4,113 @@ require_relative 'game_turn'
 require_relative 'treasure_trove'
 require 'csv'
 
-class Game
-  attr_reader :title
+module TreasureHunter
+  class Game
+    attr_reader :title
 
-  def initialize(title)
-    @title = title
-    @players = []
-  end
-
-  def load_players(from_file)
-    CSV.foreach(from_file) do |row|
-      player = Player.new(row[0], row[1].to_i)
-      add_player(player)
+    def initialize(title)
+      @title = title
+      @players = []
     end
-  end
 
-  def save_high_scores(to_file="high_scores.txt")
-    File.open(to_file, "w") do |file|
-      file.puts "#{@title} High Scores:"
-      @players.sort.each do |player|
-        file.puts high_score_entry(player)
+    def load_players(from_file)
+      CSV.foreach(from_file) do |row|
+        player = Player.new(row[0], row[1].to_i)
+        add_player(player)
       end
     end
-  end
 
-  def high_score_entry(player)
-    formated_name = player.name.ljust(20, '.')
-    "#{formated_name}#{player.score}"
-  end
-
-  def add_player(player)
-    @players << player
-  end
-
-  def print_name_and_health(player)
-    puts "#{player.name} (#{player.health})"
-  end
-
-  def play(rounds)
-    puts "There are #{@players.size} players in the game:"
-    @players.each do |player|
-      puts player
-    end
-
-    treasures = TreasureTrove::TREASURES
-
-    puts "\nThere are #{treasures.size} treasures to be found:"
-
-    treasures.each do |t|
-      puts "A #{t.name} is worth #{t.points} points"
-    end
-
-    1.upto(rounds) do |round|
-      if block_given?
-        break if yield
+    def save_high_scores(to_file="high_scores.txt")
+      File.open(to_file, "w") do |file|
+        file.puts "#{@title} High Scores:"
+        @players.sort.each do |player|
+          file.puts high_score_entry(player)
+        end
       end
+    end
 
-      puts "\nRound #{round}:"
+    def high_score_entry(player)
+      formated_name = player.name.ljust(20, '.')
+      "#{formated_name}#{player.score}"
+    end
 
+    def add_player(player)
+      @players << player
+    end
+
+    def print_name_and_health(player)
+      puts "#{player.name} (#{player.health})"
+    end
+
+    def play(rounds)
+      puts "There are #{@players.size} players in the game:"
       @players.each do |player|
-        GameTurn.take_turn(player)
         puts player
       end
-    end
-  end
 
-  def print_stats
-    strong_players, wimpy_players = @players.partition { |p| p.strong? }
+      treasures = TreasureTrove::TREASURES
 
-    puts "\n#{@title} Stats:"
+      puts "\nThere are #{treasures.size} treasures to be found:"
 
-    puts "\n#{strong_players.size} strong players:"
-    strong_players.each do |player|
-      print_name_and_health(player)
-    end
-
-    puts "\n#{wimpy_players.size} wimpy players:"
-    wimpy_players.each do |player|
-      print_name_and_health(player)
-    end
-
-    puts "\n#{@title}'s High Scores:"
-    @players.sort.each do |player|
-      puts high_score_entry(player)
-    end
-
-    @players.each do |player|
-      puts "\n#{player.name}'s point totals:"
-      puts "#{player.points} total points"
-    end
-
-    puts "\n#{total_points} total points from treasures found"
-
-    @players.sort.each do |player|
-      puts "\n#{player.name} point summary:"
-
-      player.each_found_treasure do |treasure|
-        puts "#{treasure.points} total #{treasure.name} points"
+      treasures.each do |t|
+        puts "A #{t.name} is worth #{t.points} points"
       end
-      puts "#{player.points} grand total points"
-    end
-  end
 
-  def total_points
-    @players.reduce(0) do |sum, player|
-      sum + player.points
+      1.upto(rounds) do |round|
+        if block_given?
+          break if yield
+        end
+
+        puts "\nRound #{round}:"
+
+        @players.each do |player|
+          GameTurn.take_turn(player)
+          puts player
+        end
+      end
+    end
+
+    def print_stats
+      strong_players, wimpy_players = @players.partition { |p| p.strong? }
+
+      puts "\n#{@title} Stats:"
+
+      puts "\n#{strong_players.size} strong players:"
+      strong_players.each do |player|
+        print_name_and_health(player)
+      end
+
+      puts "\n#{wimpy_players.size} wimpy players:"
+      wimpy_players.each do |player|
+        print_name_and_health(player)
+      end
+
+      puts "\n#{@title}'s High Scores:"
+      @players.sort.each do |player|
+        puts high_score_entry(player)
+      end
+
+      @players.each do |player|
+        puts "\n#{player.name}'s point totals:"
+        puts "#{player.points} total points"
+      end
+
+      puts "\n#{total_points} total points from treasures found"
+
+      @players.sort.each do |player|
+        puts "\n#{player.name} point summary:"
+
+        player.each_found_treasure do |treasure|
+          puts "#{treasure.points} total #{treasure.name} points"
+        end
+        puts "#{player.points} grand total points"
+      end
+    end
+
+    def total_points
+      @players.reduce(0) do |sum, player|
+        sum + player.points
+      end
     end
   end
 end

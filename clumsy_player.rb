@@ -1,20 +1,22 @@
 require_relative 'player'
 
-class ClumsyPlayer < Player
-  attr_reader :boost_factor
+module TreasureHunter
+  class ClumsyPlayer < Player
+    attr_reader :boost_factor
 
-  def initialize(name, health=100, boost_factor=1)
-    super(name, health)
-    @boost_factor = boost_factor
-  end
+    def initialize(name, health=100, boost_factor=1)
+      super(name, health)
+      @boost_factor = boost_factor
+    end
 
-  def w00t
-    @boost_factor.times { super }
-  end
+    def w00t
+      @boost_factor.times { super }
+    end
 
-  def found_treasures(treasure)
-    damaged_treasure = Treasure.new(treasure.name, treasure.points / 2.0.to_i)
-    super damaged_treasure
+    def found_treasures(treasure)
+      damaged_treasure = Treasure.new(treasure.name, treasure.points / 2.0.to_i)
+      super damaged_treasure
+    end
   end
 end
 

@@ -1,27 +1,26 @@
 require_relative 'player'
+module TreasureHunter
+  class BerserkPlayer < Player
 
-class BerserkPlayer < Player
+    def initialize(name, health=100)
+      super(name, health)
+      @w00t_count = 0
+    end
 
-  def initialize(name, health=100)
-    super(name, health)
-    @w00t_count = 0
+    def berserk?
+      @w00t_count > 5
+    end
+
+    def w00t
+      super
+      @w00t_count += 1
+      puts "WARNING: #{@name} has gone berserk!" if berserk?
+    end
+
+    def blam
+      berserk? ? w00t : super
+    end
   end
-
-  def berserk?
-    @w00t_count > 5
-  end
-
-  def w00t
-    super
-    @w00t_count += 1
-    puts "WARNING: #{@name} has gone berserk!" if berserk?
-  end
-
-  def blam
-    berserk? ? w00t : super
-  end
-
-
 end
 
 if __FILE__ == $0

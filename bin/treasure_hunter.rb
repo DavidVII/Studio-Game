@@ -20,7 +20,7 @@ module TreasureHunter
     case answer
     when /^\d+$/
       game.play(answer.to_i)
-    when 'quit', 'exit'
+    when 'quit', 'exit', 'q'
       game.print_stats
       break
     else

@@ -1,7 +1,7 @@
 Treasure Hunter High Scores:
-Michelangelo........565
-Raphael.............450
-Berserk.............450
-Klutz...............195
-Leonardo............190
-Donatello...........165
+Berserk.............1950
+Donatello...........1570
+Leonardo............1135
+Raphael.............1035
+Klutz...............702
+Michelangelo........510

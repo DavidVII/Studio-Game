@@ -2,8 +2,7 @@ require_relative 'treasure_trove'
 require_relative 'playable'
 
 class Player
-  attr_accessor :name
-  attr_reader :health
+  attr_accessor :name, :health
 
   include Playable
 

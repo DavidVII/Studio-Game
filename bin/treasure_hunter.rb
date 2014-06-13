@@ -1,10 +1,11 @@
-require_relative 'game'
-require_relative 'clumsy_player'
-require_relative 'berserk_player'
+require_relative '../lib/treasure_hunter/game'
+require_relative '../lib/treasure_hunter/clumsy_player'
+require_relative '../lib/treasure_hunter/berserk_player'
 
 module TreasureHunter
   game = TreasureHunter::Game.new("Treasure Hunter")
-  game.load_players(ARGV.shift || "players.csv")
+  default_player_file = File.join(File.dirname(__FILE__), 'players.csv')
+  game.load_players(ARGV.shift || default_player_file)
 
   klutz = ClumsyPlayer.new('klutz', 105, 10)
   game.add_player(klutz)

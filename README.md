@@ -1,0 +1,3 @@
+# TreasureHunter
+
+Better than Log!

@@ -1,4 +1,4 @@
-require_relative 'game'
+require 'treasure_hunter/game'
 
 module TreasureHunter
   describe Game do

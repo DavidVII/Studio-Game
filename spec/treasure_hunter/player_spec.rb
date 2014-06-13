@@ -1,4 +1,4 @@
-require_relative 'player'
+require 'treasure_hunter/player'
 
 module TreasureHunter
   describe Player do

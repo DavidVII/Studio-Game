@@ -1,4 +1,4 @@
-require_relative 'treasure_trove'
+require 'treasure_hunter/treasure_trove'
 
 module TreasureHunter
   describe Treasure do

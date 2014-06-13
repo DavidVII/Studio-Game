@@ -1,4 +1,4 @@
-require_relative 'berserk_player'
+require 'treasure_hunter/berserk_player'
 
 module TreasureHunter
   describe BerserkPlayer do

@@ -1,4 +1,4 @@
-require_relative 'clumsy_player'
+require 'treasure_hunter/clumsy_player'
 
 module TreasureHunter
   describe ClumsyPlayer do

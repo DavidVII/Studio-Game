@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require_relative '../lib/treasure_hunter/game'
 require_relative '../lib/treasure_hunter/clumsy_player'
 require_relative '../lib/treasure_hunter/berserk_player'
